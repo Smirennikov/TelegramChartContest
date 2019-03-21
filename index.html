@@ -2,11 +2,136 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<style>
+		body{
+			background: #108be3;
+			font-family: sans-serif;
+			margin: 0;
+		}
+		.main{
+			width: 555px;
+			margin: auto;
+		}
+		.chart{
+			background: #fff;
+			padding: 50px;
+			margin: 50px 0;
+		}
+		.control-panel{
+			position: relative;
+			overflow: hidden;
+		}
+		.control{
+			display: flex;
+			position: absolute;
+			top: 0;
+			height: 100%;
+		}
+		.left-control{
+			background: rgba(245, 249, 251, 0.69);
+			width: 335px;
+			box-sizing: border-box;
+			border-right: 5px solid #ddeaf3;
+		}
+		.visible-control{
+			width: 115px;
+			border-top: 1px solid #ddeaf3;
+			border-bottom: 1px solid #ddeaf3;
+	
+			
+			box-sizing: border-box;
+			cursor: pointer;
+		}
+		.right-control{
+			background: rgba(245, 249, 251, 0.69);
+			border-left: 5px solid #ddeaf3;
+			box-sizing: border-box;
+		}
+		.visible-chart{
+		    width: 455px;
+		    position: relative;
+		    overflow: hidden;
+		}
+		.chartBg{
+		    position: absolute;
+		}
+		.section-buttons{
+			margin-top:20px;
+			display: flex;
+		}
+
+		.button{
+			border-radius: 50px;
+			background: #fff;
+			border: 1px solid #e6ecf0;
+			padding: 10px ;
+			padding-right: 14px;
+			color:#43484b;
+			font-size: 17px;
+			outline: 0;
+			cursor:pointer;
+			display: flex;
+			align-items: center;
+			margin-right: 20px;
+		}
+		.button:last-child{
+			margin-right: 0;
+		}
+		.button span{
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			border: 1px solid #e6ecf0;
+			display: inline-block;
+			margin-right: 10px;
+			position: relative;
+		}.button span:before,.button span:after{
+			content: '';
+			position: absolute;
+		    height: 3px;
+		    background: #fff;
+		    margin: auto;
+		    left: 0;
+		    border-radius: 3px;
+		    right: 0;
+		    top: 0;
+		    bottom: 0;
+		}
+		.button span:before{
+			width: 6px;
+			transform: rotate(45deg) translate(0,5px);
+		}
+		.button span:after{
+			transform: rotate(135deg) translate(0,-3px);
+    		width: 12px;
+		}
+
+	</style>
 </head>
 <body>
-	<h2>Followers</h2>
-	<canvas id='chart'></canvas>
-	<canvas id='chartControl'></canvas>
+	<main class="main">
+		<div class='chart'>
+			<h2>Followers</h2>
+			<section class="visible-chart">
+				<canvas class='chartBg'></canvas>
+				<canvas class='chartLine'></canvas>
+			</section>
+			
+			<section class="control-panel">
+				<canvas class='chartControl'></canvas>
+				<div class="control">
+					<div class="left-control"></div>
+					<div class="visible-control"></div>
+					<div class="right-control"></div>
+				</div>
+			</section>
+
+			<section class="section-buttons">
+				<button class="button"> <span></span> Joined </button>
+				<button class="button"> <span></span> Left </button>
+			</section>
+		</div>
+	</main>
 </body>
 	<script src='dist/main.js'></script>
 </html>
