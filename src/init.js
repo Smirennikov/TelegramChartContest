@@ -14,7 +14,7 @@ import {drawBg} from './draw/drawBg'
 
 
 
-getData('/src/chart_data.json')
+getData('src/chart_data.json')
 	.then(response =>{
 		// берем данные и рассериализуем их 
 		let jsonparse = JSON.parse(response);
