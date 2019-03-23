@@ -1,25 +1,25 @@
-
-
-function drawBg(){
+function drawBg(bg){
 		let i = 7;
-		let stepY = chartBg.height + 58;
-		
+		let stepY = bg.height + 58;
+		let ctx = bg.getContext('2d')
 
-		ctx3.strokeStyle = '#f2f4f5'
-		ctx3.font = '12px sans-serif'
-		ctx3.fillStyle = '#97a3ab'
+		ctx.strokeStyle = '#f2f4f5'
+		ctx.font = '12px sans-serif'
+		ctx.fillStyle = '#97a3ab'
+
+
 		while(i-=1){
-			ctx3.beginPath();
+			ctx.beginPath();
 
-			ctx3.moveTo(0, stepY -= 60);
-			ctx3.fillText(stepY, 0 , stepY - 6)
-			ctx3.lineTo(chart.width, stepY )
-
-			ctx3.stroke()
+			ctx.moveTo(0, stepY -= 60);
+			ctx.fillText(stepY, 0 , stepY - 6)
+			ctx.lineTo(bg.width, stepY )
+			
+			ctx.stroke()
 		
 		}		
 	
 	}
 
 
-export {drawBg}
+export default drawBg

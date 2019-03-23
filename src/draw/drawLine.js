@@ -3,6 +3,9 @@ function drawLine(obj){
 		let color = obj.mas[0]['colors'][mas[0]];
 		let masLength = mas.length;
 		
+
+
+
 		let chart = obj.canvas.canvas;
 		let ctx = obj.canvas.ctx();
 
@@ -16,11 +19,16 @@ function drawLine(obj){
 		ctx.lineJoin = 'round';
 		ctx.lineCap = 'round';
 
+		
+
 		if(stepX >= 0){
+
 			while(masLength -= 1){
 				ctx.lineTo(stepX -= obj.step, chart.height - mas[masLength] / obj.dif)
 			}
 		}
+
+		
 		
 		ctx.stroke();
 

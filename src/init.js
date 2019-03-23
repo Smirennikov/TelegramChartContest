@@ -1,16 +1,13 @@
 import getData from './getData'
 
-
 import ControlChart from './control/controlPanel'
 import moveVisible from './control/moveVisible'
 import resizeVisible from './control/resizeVisible'
-
-
-
-
+import buttonsControl from './control/buttonsControl'
 
 import drawLine from './draw/drawLine'
-import {drawBg} from './draw/drawBg'
+import drawBg from './draw/drawBg'
+
 
 
 
@@ -40,63 +37,8 @@ controls.chart.moveVisible()
 resizeVisible()
 controls.chart.resizeVisible()
 
-
-console.log(controls)
-
-	
-	console.log(res)
-
-				drawLine({
-					n: 1,
-					mas: res,
-					canvas: controls.chart.chartLine,
-					lineWidth: 2,
-					step:20,
-					dif: 1
-				});
-
-				drawLine({
-					n: 1,
-					mas: res,
-					canvas: controls.chart.chartControl,
-					lineWidth: 1,
-					step: 6,
-					dif: controls.chart.chartLine.height / controls.chart.chartControl.height
-				});
-	
-			drawLine({
-					n: 2,
-					mas: res,
-					canvas: controls.chart.chartLine,
-					lineWidth: 2,
-					step: 20,
-					dif: 1
-				});
-				drawLine({
-					n: 2,
-					mas: res,
-					canvas: controls.chart.chartControl,
-					lineWidth: 1,
-					step: 6,
-					dif: controls.chart.chartLine.height / controls.chart.chartControl.height
-				});
-
-	
+buttonsControl(res)
+controls.chart.buttonsControl()
 
 
-	
-
-	
-
-	
-	
-	
-
-
-	
 }
-
-
-
-
-

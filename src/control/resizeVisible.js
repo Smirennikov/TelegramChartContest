@@ -39,25 +39,22 @@ function resizeVisible(){
 			}
 		}
 
-		function maxWidthRisezed(){
-			that.rightControl.style.maxWidth = that.getCoords(that.panel).width - that.getCoords(that.smallScreen).width - 5 + 'px';
-			that.leftControl.style.maxWidth = that.getCoords(that.panel).width - that.getCoords(that.smallScreen).width - 5 + 'px';
-			that.smallScreen.style.maxWidth = that.getCoords(that.panel).width + 'px';
-		}
-
+		
 		function resizedLeft(e){
 
 			that.panel.onmousemove = (e) =>{
 
-				maxWidthRisezed()
+		
 
 				if(e.movementX < 0){
-					that.leftControl.style.width = `${that.getCoords(that.leftControl).width - Math.abs(e.movementX)}px`
-					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width + Math.abs(e.movementX)}px`
+					that.leftControl.style.width = `${that.getCoords(that.leftControl).width - Math.abs(e.movementX)}px`;
+					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width + Math.abs(e.movementX)}px`;
+					that.leftControl.style.maxWidth = `${that.getCoords(that.panel).width - that.getCoords(that.smallScreen).width - 5}px`;
 				}
 				if(e.movementX > 0){
-					that.leftControl.style.width = `${that.getCoords(that.leftControl).width + Math.abs(e.movementX)}px`
-					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width - Math.abs(e.movementX)}px`
+					that.leftControl.style.width = `${that.getCoords(that.leftControl).width + Math.abs(e.movementX)}px`;
+					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width - Math.abs(e.movementX)}px`;
+					that.leftControl.style.maxWidth = `${that.getCoords(that.panel).width - that.getCoords(that.smallScreen).width - 5}px`;
 				}
 			}
 		}
@@ -65,15 +62,16 @@ function resizeVisible(){
 		function resizedRight(){
 			that.panel.onmousemove = (e) =>{
 
-				maxWidthRisezed()
 
 				if(e.movementX < 0){
-					that.rightControl.style.width = `${that.getCoords(that.rightControl).width + Math.abs(e.movementX)}px`
-					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width - Math.abs(e.movementX)}px`
+					that.rightControl.style.width = `${that.getCoords(that.rightControl).width + Math.abs(e.movementX)}px`;
+					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width - Math.abs(e.movementX)}px`;
+					that.rightControl.style.maxWidth = `${that.getCoords(that.panel).width - that.getCoords(that.smallScreen).width - 5}px`
 				}
 				if(e.movementX > 0){
 					that.rightControl.style.width = `${that.getCoords(that.rightControl).width - Math.abs(e.movementX)}px`
 					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width + Math.abs(e.movementX)}px`
+					that.rightControl.style.maxWidth = `${that.getCoords(that.panel).width - that.getCoords(that.smallScreen).width - 5}px`
 				}
 			}
 		}

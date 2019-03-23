@@ -17,6 +17,10 @@
 			padding: 50px;
 			margin: 50px 0;
 		}
+		.chart h2{
+			margin: 0;
+			font-size: 22px;
+		}
 		.control-panel{
 			position: relative;
 			overflow: hidden;
@@ -26,6 +30,7 @@
 			position: absolute;
 			top: 0;
 			height: 100%;
+			transform: translateZ(0);
 		}
 		.left-control{
 			background: rgba(245, 249, 251, 0.69);
@@ -52,8 +57,12 @@
 		    position: relative;
 		    overflow: hidden;
 		}
-		.chartBg{
-		    position: absolute;
+		
+		.chartLine{
+			position: absolute;
+		    right: 0;
+		    top: 0;
+			will-change: transform;
 		}
 		.section-buttons{
 			margin-top:20px;
@@ -85,6 +94,7 @@
 			display: inline-block;
 			margin-right: 10px;
 			position: relative;
+
 		}.button span:before,.button span:after{
 			content: '';
 			position: absolute;
@@ -99,10 +109,10 @@
 		}
 		.button span:before{
 			width: 6px;
-			transform: rotate(45deg) translate(0,5px);
+			transform: rotate(45deg) translate(0px,4px);
 		}
 		.button span:after{
-			transform: rotate(135deg) translate(0,-3px);
+			transform: rotate(135deg) translate(-1px,-2px);
     		width: 12px;
 		}
 
@@ -126,10 +136,7 @@
 				</div>
 			</section>
 
-			<section class="section-buttons">
-				<button class="button"> <span></span> Joined </button>
-				<button class="button"> <span></span> Left </button>
-			</section>
+			<section class="section-buttons"></section>
 		</div>
 	</main>
 </body>

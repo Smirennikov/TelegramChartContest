@@ -20,17 +20,22 @@ function ControlChart(chart){
 	this.smallScreen = chart.getElementsByClassName('visible-control')[0];
 	this.leftControl = chart.getElementsByClassName('left-control')[0];
 	this.rightControl = chart.getElementsByClassName('right-control')[0];
+	this.sectionButtons = chart.getElementsByClassName('section-buttons')[0];
 }
 
 ControlChart.prototype = {
 	getCoords: function(elem){
 		return elem.getBoundingClientRect();
+	},
+	clear: function(){
+		this.chartLine.ctx().clearRect(0,0,this.chartLine.width,this.chartLine.height)
+		this.chartControl.ctx().clearRect(0,0,this.chartControl.width,this.chartControl.height)
 	}
 }
 
 ControlChart.prototype.chartLine = new SetChart({
 	canvas: document.getElementsByClassName('chartLine')[0],
-	width: 910,
+	width: 1910,
 	height: 360
 })
 ControlChart.prototype.chartBg = new SetChart({
@@ -45,6 +50,7 @@ ControlChart.prototype.chartControl = new SetChart({
 })
 
 ControlChart.prototype.chartLine.setSize();
+ControlChart.prototype.chartBg.setSize();
 ControlChart.prototype.chartControl.setSize();
 
 
