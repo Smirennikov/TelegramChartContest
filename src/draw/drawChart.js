@@ -1,23 +1,29 @@
-import drawBg from './drawBg' 
 import drawLine from './drawLine'
 import ControlChart from '../control/controlPanel'
 
 function drawChart(dataMas){
-	ControlChart.prototype.drawChart = function(column){
+	ControlChart.prototype.drawChart = function(chart){
 		
-		drawBg(this.chartBg.canvas)
-
 		let that = this;
 
-		let chartControlStep = 115 / 22;
-
-		let chartLineStep = 455 / (this.getCoords(this.smallScreen).width / chartControlStep);
-
-
 		this.panel.addEventListener('mousedown',function(){
-			that.panel.addEventListener('mousemove',function(){
-				
+			that.chartLine.canvas.style.willChange = 'transform';			
+		})
+		this.panel.addEventListener('mousedown',checkPanel)
 
+		this.panel.addEventListener('mouseup',function(){
+			that.chartLine.canvas.style.willChange = 'auto';
+		})
+		this.panel.addEventListener('mouseup',checkPanel)
+
+		// function for checking control panel and draw chart
+		function checkPanel(){
+			that.panel.addEventListener('mousemove', checkAndDraw)
+		}
+		that.panel.addEventListener('mouseout', checkAndDraw)
+
+		function checkAndDraw(){
+				
 				// differnt big screen and small screen
 				let sizeDif = that.getCoords(that.panel).width / that.getCoords(that.smallScreen).width;
 
@@ -28,61 +34,18 @@ function drawChart(dataMas){
 				that.chartLine.canvas.style.transform = `translate3d(${ that.getCoords(that.rightControl).width * sizeDif}px,0,0)`
 
 				// changes stepX for big screen
-				chartLineStep = 455 / (that.getCoords(that.smallScreen).width / chartControlStep)
+				that.widthBigStep = that.smallChartWidth / (that.getCoords(that.smallScreen).width / that.widthSmallStep)
 
 				// clear big screen canvas
 				that.chartLine.ctx().clearRect(0,0, that.chartLine.width, that.chartLine.height)
 
-				drawLine({
-					n: 1,
-					mas: dataMas,
-					canvas: that.chartLine,
-					lineWidth: 2,
-					step: chartLineStep,
-					dif: 1
-				});
+				that.activeChartLine()			
+			}
 
-				drawLine({
-					n: 2,
-					mas: dataMas,
-					canvas: that.chartLine,
-					lineWidth: 2,
-					step: chartLineStep,
-					dif: 1
-				});
 
-			})
-		})
-
-		function drawing(names){
-
-			drawLine({
-					n: names,
-					mas: dataMas,
-					canvas: that.chartLine,
-					lineWidth: 2,
-					step: chartLineStep,
-					dif: 1
-				});
-
-			drawLine({
-					n: names,
-					mas: dataMas,
-					canvas: that.chartControl,
-					lineWidth: 1,
-					step: chartControlStep,
-					dif: that.chartLine.height / that.chartControl.height
-				});
-		}
-
-		drawing(parseInt(column.slice(1)) + 1)
+		this.drawMainChart(parseInt(chart.slice(1)) + 1)
+		this.drawControlChart(parseInt(chart.slice(1)) + 1)
 	
-
-		
-
-
-		
-
 	}
 }
 

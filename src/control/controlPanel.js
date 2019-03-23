@@ -1,3 +1,5 @@
+
+///////////////////////////////////////
 function SetChart(obj){
 	this.canvas = obj.canvas,
 	this.width = obj.width,
@@ -13,7 +15,7 @@ SetChart.prototype = {
 		this.canvas.height = this.height;
 	}
 }
-
+/////////////////////////////////////////////
 function ControlChart(chart){
 	this.chart = chart;
 	this.panel = chart.getElementsByClassName('control-panel')[0];
@@ -21,6 +23,14 @@ function ControlChart(chart){
 	this.leftControl = chart.getElementsByClassName('left-control')[0];
 	this.rightControl = chart.getElementsByClassName('right-control')[0];
 	this.sectionButtons = chart.getElementsByClassName('section-buttons')[0];
+
+	// small chart (control chart)
+	this.smallChartWidth = this.panel.clientWidth;
+	this.smallChartStep = 20;
+	this.widthSmallStep = Math.floor(this.smallScreen.clientWidth / this.smallChartStep);
+
+	// big chart (main chart)
+	this.widthBigStep = Math.floor(this.smallChartWidth / this.smallChartStep);
 }
 
 ControlChart.prototype = {
@@ -28,8 +38,43 @@ ControlChart.prototype = {
 		return elem.getBoundingClientRect();
 	},
 	clear: function(){
-		this.chartLine.ctx().clearRect(0,0,this.chartLine.width,this.chartLine.height)
+		this.chartLine.ctx().clearRect(0,0,this.getCoords(this.chartLine.canvas).width,this.chartLine.height)
 		this.chartControl.ctx().clearRect(0,0,this.chartControl.width,this.chartControl.height)
+	},
+	createdButton: function(name,key){
+		let button = document.createElement('button');
+		let span = document.createElement('span');
+		button.className = 'button';
+		button.setAttribute('data-chart', key)
+		button.appendChild(span);
+		button.innerHTML += name;
+		this.sectionButtons.appendChild(button);
+	},
+	drawMainChart: function(nameLine){
+		this.drawLine({
+				n: nameLine,
+				canvas: this.chartLine,
+				lineWidth: 2,
+				step: this.widthBigStep,
+				dif: 1
+		});
+	},
+	drawControlChart: function(nameLine){
+		this.drawLine({
+				n: nameLine,
+				canvas: this.chartControl,
+				lineWidth: 1,
+				step: this.widthSmallStep,
+				dif: this.chartLine.height / this.chartControl.height
+			})
+	},
+	activeChartLine: function(){
+		for(let key in this.activeLineChart){
+			for(let i = 1, max = this.dataMas[0]['columns'].length; i < max; i += 1){
+				if(this.dataMas[0]['columns'][i][0] === this.activeLineChart[key])
+				this.drawMainChart(i)	
+			}		
+		}
 	}
 }
 

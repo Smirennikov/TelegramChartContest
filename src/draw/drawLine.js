@@ -1,9 +1,11 @@
-function drawLine(obj){
-		let mas = obj.mas[0]['columns'][obj.n];
-		let color = obj.mas[0]['colors'][mas[0]];
+import ControlChart from '../control/controlPanel'
+
+function drawLine(){
+	ControlChart.prototype.drawLine = function(obj){
+		let mas = this.dataMas[0]['columns'][obj.n];
+		let color = this.dataMas[0]['colors'][mas[0]];
 		let masLength = mas.length;
 		
-
 
 
 		let chart = obj.canvas.canvas;
@@ -33,5 +35,6 @@ function drawLine(obj){
 		ctx.stroke();
 
 	}
+}
 
 export default drawLine

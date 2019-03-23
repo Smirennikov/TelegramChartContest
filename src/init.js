@@ -10,7 +10,6 @@ import drawBg from './draw/drawBg'
 
 
 
-
 getData('src/chart_data.json')
 	.then(response =>{
 		// берем данные и рассериализуем их 
@@ -18,27 +17,28 @@ getData('src/chart_data.json')
 		return jsonparse;
 	})
 	.then(jsonparse =>{
-		// берм то что нам нужно 
-		iterateJSON(jsonparse)
+
+		ControlChart.prototype.dataMas = jsonparse; 
+
+		let controls = {}; 
+		controls.chart = new ControlChart(document.getElementsByClassName('chart')[0])
+		console.log(controls)
+		drawBg(controls.chart.chartBg.canvas)
+
+		// include modules
+		moveVisible()
+		controls.chart.moveVisible()
+
+		resizeVisible()
+		controls.chart.resizeVisible()
+		
+		drawLine()
+
+		buttonsControl(jsonparse)
+		controls.chart.buttonsControl()
+
+
+
 	})
 
 
-
-function iterateJSON(res){
-	
-		
-let controls = {}; 
-controls.chart = new ControlChart(document.getElementsByClassName('chart')[0])
-
-
-moveVisible()
-controls.chart.moveVisible()
-
-resizeVisible()
-controls.chart.resizeVisible()
-
-buttonsControl(res)
-controls.chart.buttonsControl()
-
-
-}
