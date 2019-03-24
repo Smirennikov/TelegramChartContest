@@ -17,7 +17,7 @@ getData('src/chart_data.json')
 		return jsonparse;
 	})
 	.then(jsonparse =>{
-		
+
 		drawBg()
 		moveVisible()
 		resizeVisible()
@@ -41,5 +41,5 @@ getData('src/chart_data.json')
 		}
 		
 		
-
+		
 	})

@@ -4,8 +4,26 @@
 	<meta charset="utf-8">
 
 	<style>
+		:root{
+			--bg: #108be3;
+			--chart-white: #fff;
+			--chart-black: #000;
+			--chart-button:#43484b;
+			--bg-control: rgba(245, 249, 251, 0.69);
+			--border-visible: #ddeaf3;
+			--border-bottom: #e6ecf0;
+		}:root[theme='Night']{
+			--bg: #242f3e;
+			--chart-white: #242f3e;
+			--chart-black: #fff;
+			--chart-button: #fff;
+			--bg-control: rgba(31, 42, 56, 0.69);
+			--border-visible: #40566b;
+			--border-bottom: #40566b;
+		}
 		body{
 			background: #108be3;
+			background: var(--bg);
 			font-family: sans-serif;
 			margin: 0;
 		}
@@ -15,11 +33,14 @@
 		}
 		.chart{
 			background: #fff;
+			background: var(--chart-white);
 			padding: 50px;
 			margin: 50px 0;
 		}
 		.chart h2{
 			margin: 0;
+			color:#000;
+			color:var(--chart-black);
 			font-size: 22px;
 		}
 		.control-panel{
@@ -35,20 +56,26 @@
 		}
 		.left-control{
 			background: rgba(245, 249, 251, 0.69);
+			background: var(--bg-control);
 			width: 335px;
 			box-sizing: border-box;
 			border-right: 5px solid #ddeaf3;
+			border-right: 5px solid var(--border-visible);
 		}
 		.visible-control{
 			width: 115px;
 			border-top: 1px solid #ddeaf3;
+			border-top: 1px solid var(--border-visible);
 			border-bottom: 1px solid #ddeaf3;
+			border-bottom: 1px solid var(--border-visible);
 			box-sizing: border-box;
 			cursor: pointer;
 		}
 		.right-control{
 			background: rgba(245, 249, 251, 0.69);
+			background: var(--bg-control);
 			border-left: 5px solid #ddeaf3;
+			border-left: 5px solid var(--border-visible);
 			box-sizing: border-box;
 		}
 		.visible-chart{
@@ -74,9 +101,11 @@
 			border-radius: 50px;
 			background: 0;
 			border: 1px solid #e6ecf0;
+			border: 1px solid var(--border-bottom);
 			padding: 10px ;
 			padding-right: 14px;
 			color:#43484b;
+			color:var(--chart-button);
 			font-size: 17px;
 			outline: 0;
 			cursor:pointer;
@@ -92,6 +121,7 @@
 			height: 24px;
 			border-radius: 50%;
 			border: 1px solid #e6ecf0;
+			border: 1px solid var(--border-bottom);
 			display: inline-block;
 			margin-right: 10px;
 			position: relative;
@@ -118,10 +148,25 @@
     		width: 12px;
 		}
 
+		.button-theme-mode{
+			background: 0;
+		    color: #fff;
+		    outline: 0;
+		    border: 0;
+		    font-size: 19px;
+		    text-align: center;
+		    width: 100%;
+		    margin-top: 48px;
+		    cursor:pointer;
+		}
+
 	</style>
 </head>
 <body>
-	<main class="main"></main>
+	<main class="main">
+		<button class="button-theme-mode">Switch to Night Mode</button>
+
+	</main>
 </body>
 	<script src='dist/main.js'></script>
 </html>

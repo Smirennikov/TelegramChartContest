@@ -219,11 +219,34 @@ ControlChart.prototype = {
 		}
 
 
-	}
+	},
+	switchTheme: function(){
+			const button = document.querySelector('.button-theme-mode');
+			const doc = document.documentElement;
+
+			if(localStorage.getItem('theme') === 'Night'){
+				this.innerHTML = 'Switch to Day Mode';
+				doc.setAttribute('theme', 'Night');
+			}
+			let that = this;
+			button.addEventListener('click',function(){
+				if(doc.getAttribute('theme') === 'Night'){
+					doc.setAttribute('theme', '')
+					this.innerHTML = 'Switch to Night Mode';
+					localStorage.setItem('theme','Day')
+
+				}else{
+					doc.setAttribute('theme', 'Night');
+					this.innerHTML = 'Switch to Day Mode';
+					localStorage.setItem('theme','Night')
+				}
+			})
+		}
+
 }
 
 
-
+ControlChart.prototype.switchTheme()
 
 
 

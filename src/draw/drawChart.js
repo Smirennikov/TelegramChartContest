@@ -45,6 +45,8 @@ function drawChart(dataMas){
 				that.activeChartLine()	
 
 				that.drawDateLine()
+				
+				
 			}
 
 

@@ -5,6 +5,8 @@ function drawBg(){
 		
 		let ctx = this.ctx(this.chartBg)
 		let maxY = this.maxExt()
+
+		
 		ctx.strokeStyle = '#f2f4f5'
 		ctx.font = '12px sans-serif'
 		ctx.fillStyle = '#97a3ab'
@@ -46,12 +48,7 @@ function drawBg(){
 		
 		}	
 
-
-			
-		this.drawDateLine()
-
-
-					
+		this.drawDateLine()			
 	}
 }
 
