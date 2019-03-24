@@ -8,7 +8,7 @@ function resizeVisible(){
 
 		this.leftControl.onmouseover = () =>{
 
-			this.chart.addEventListener('mousemove', leftRisize)
+			this.panel.addEventListener('mousemove', leftRisize)
 
 			function leftRisize(e){
 				if(e.pageX >= that.getCoords(that.leftControl).right - 5 && e.pageX <= that.getCoords(that.leftControl).right){
@@ -24,7 +24,7 @@ function resizeVisible(){
 
 		this.rightControl.onmouseover = () =>{
 
-			this.chart.addEventListener('mousemove', rightRisize)
+			this.panel.addEventListener('mousemove', rightRisize)
 
 			function rightRisize(e){
 

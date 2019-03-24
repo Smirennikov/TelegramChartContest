@@ -17,31 +17,29 @@ getData('src/chart_data.json')
 		return jsonparse;
 	})
 	.then(jsonparse =>{
-
-		ControlChart.prototype.dataMas = jsonparse; 
-
-		let controls = {}; 
-		controls.chart = new ControlChart(document.getElementsByClassName('chart')[0], 4)
-
-
-		console.log(controls)
 		
-
-
-
-		// include modules
 		drawBg()
-		controls.chart.drawBg()
-
 		moveVisible()
-		controls.chart.moveVisible()
-
 		resizeVisible()
-		controls.chart.resizeVisible()
-		
 		drawLine()
-
 		buttonsControl(jsonparse)
-		controls.chart.buttonsControl()	
+		ControlChart.prototype.dataMas = jsonparse; 
+		 
+		let controls = {};
+
+		function instalChart(num){
+			ControlChart.prototype.createdChart(num)
+			controls['chart' + num] = new ControlChart(num)
+			controls['chart' + num].drawBg()
+			controls['chart' + num].moveVisible()
+			controls['chart' + num].resizeVisible()
+			controls['chart' + num].buttonsControl()
+
+		}
+		for(let num in jsonparse){
+			instalChart(num)
+		}
+		
+		
 
 	})

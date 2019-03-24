@@ -5,16 +5,18 @@ function drawLine(){
 		let mas = this.dataMas[this.numChart]['columns'][obj.n];
 		let color = this.dataMas[this.numChart]['colors'][mas[0]];
 		
-		let line = this.lineY0;
+		let line = obj.line;
 		let lineLength = line.length;
 
-		let chart = obj.canvas.canvas;
-		let ctx = obj.canvas.ctx();
+		let chart = obj.canvas;
+		let ctx = this.ctx(obj.canvas);
 
-		let stepX = chart.width;
+		let stepX = chart.width + obj.step;
+
+		let chartHeight = chart.height - 20;
 
 		ctx.beginPath();
-		ctx.moveTo(chart.width, chart.height - mas[1]);
+		ctx.moveTo(chart.width, chartHeight - line[lineLength]);
 
 		ctx.strokeStyle = color;
 		ctx.lineWidth = obj.lineWidth;
@@ -27,13 +29,16 @@ function drawLine(){
 
 			while(lineLength -= 1){
 
-				ctx.lineTo(stepX -= obj.step, chart.height - line[lineLength] / obj.dif)
+				ctx.lineTo(stepX -= obj.step, chartHeight - line[lineLength])
 			}
 		}
 
 		
 		
 		ctx.stroke();
+
+		
+
 
 	}
 }
