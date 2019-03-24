@@ -4,8 +4,8 @@ import drawChart from '../draw/drawChart'
 function buttonsControl(dataMas){
 	ControlChart.prototype.buttonsControl = function(){
 		
-		let colors = dataMas[0]['colors'];
-		let names = dataMas[0]['names'];
+		let colors = dataMas[this.numChart]['colors'];
+		let names = dataMas[this.numChart]['names'];
 
 		drawChart(dataMas);
 
@@ -26,13 +26,10 @@ function buttonsControl(dataMas){
 				let target = e.target;
 
 				if(e.target.classList.contains('active')){
-
 					this.getElementsByTagName('span')[0].style.background = colors[this.getAttribute('data-chart')];
-					
 					that.activeLineChart.push(target.getAttribute('data-chart'));
-
 					that.drawChart(target.getAttribute('data-chart'));
-
+					
 				}else{
 					
 					that.activeLineChart = []		

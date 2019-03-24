@@ -16,7 +16,8 @@ SetChart.prototype = {
 	}
 }
 /////////////////////////////////////////////
-function ControlChart(chart){
+function ControlChart(chart, numChart){
+	this.numChart = numChart;
 	this.chart = chart;
 	this.panel = chart.getElementsByClassName('control-panel')[0];
 	this.smallScreen = chart.getElementsByClassName('visible-control')[0];
@@ -27,10 +28,10 @@ function ControlChart(chart){
 	// small chart (control chart)
 	this.smallChartWidth = this.panel.clientWidth;
 	this.smallChartStep = 20;
-	this.widthSmallStep = Math.floor(this.smallScreen.clientWidth / this.smallChartStep);
+	this.widthSmallStep = this.smallScreen.clientWidth / this.smallChartStep;
 
 	// big chart (main chart)
-	this.widthBigStep = Math.floor(this.smallChartWidth / this.smallChartStep);
+	this.widthBigStep = this.smallChartWidth / this.smallChartStep;
 }
 
 ControlChart.prototype = {
@@ -53,6 +54,7 @@ ControlChart.prototype = {
 	drawMainChart: function(nameLine){
 		this.drawLine({
 				n: nameLine,
+				line: this.lineY0,
 				canvas: this.chartLine,
 				lineWidth: 2,
 				step: this.widthBigStep,
@@ -70,17 +72,49 @@ ControlChart.prototype = {
 	},
 	activeChartLine: function(){
 		for(let key in this.activeLineChart){
-			for(let i = 1, max = this.dataMas[0]['columns'].length; i < max; i += 1){
-				if(this.dataMas[0]['columns'][i][0] === this.activeLineChart[key])
-				this.drawMainChart(i)	
+			for(let i = 1, max = this.dataMas[this.numChart]['columns'].length; i < max; i += 1){
+				if(this.dataMas[this.numChart]['columns'][i][0] === this.activeLineChart[key]){
+					this.drawMainChart(i);	
+				}			
 			}		
 		}
+	},
+	max: function(mas){
+		return Math.max(...mas);	
+	},
+	ratio: function(mas, maxChartY){
+		let max = this.max(mas);
+		if(max > maxChartY){
+			return Math.floor(max / maxChartY)
+		}else{
+			return Math.floor(maxChartY / max)
+		}
+	},
+	maxExt: function(){
+		let begin = Math.floor(this.smallScreen.clientWidth / this.widthSmallStep)
+		let end = Math.floor(this.rightControl.offsetWidth / this.widthSmallStep);
+		let mas = this.dataMas[this.numChart]['columns'][1];
+		let masLength = this.dataMas[this.numChart]['columns'][1].length - end;
+		let visibleMas = mas.slice(masLength - begin, this.dataMas[this.numChart]['columns'][1].length - end)
+		return this.max(visibleMas)
+	},
+	ratioLine: function(column){
+		console.log(this.maxY )
+		console.log(this.dataMas[this.numChart]['columns'][1].slice(1) )
+		let mas = this.dataMas[this.numChart]['columns'][1].slice(1)
+		let ratio = this.maxY / (this.chartBg.height - 60);
+		let line = mas.map(function(y){
+			return Math.floor(y / ratio )
+		})
+		this.lineY0 = line 	
+		console.log(line)
+		console.log(this.maxY / column)
 	}
 }
 
 ControlChart.prototype.chartLine = new SetChart({
 	canvas: document.getElementsByClassName('chartLine')[0],
-	width: 1910,
+	width: 1800,
 	height: 360
 })
 ControlChart.prototype.chartBg = new SetChart({

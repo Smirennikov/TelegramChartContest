@@ -44,8 +44,6 @@ function resizeVisible(){
 
 			that.panel.onmousemove = (e) =>{
 
-		
-
 				if(e.movementX < 0){
 					that.leftControl.style.width = `${that.getCoords(that.leftControl).width - Math.abs(e.movementX)}px`;
 					that.smallScreen.style.width = `${that.getCoords(that.smallScreen).width + Math.abs(e.movementX)}px`;
@@ -61,7 +59,6 @@ function resizeVisible(){
 
 		function resizedRight(){
 			that.panel.onmousemove = (e) =>{
-
 
 				if(e.movementX < 0){
 					that.rightControl.style.width = `${that.getCoords(that.rightControl).width + Math.abs(e.movementX)}px`;

@@ -6,12 +6,12 @@ function drawChart(dataMas){
 		
 		let that = this;
 
-		this.panel.addEventListener('mousedown',function(){
+		this.panel.addEventListener('mouseover',function(){
 			that.chartLine.canvas.style.willChange = 'transform';			
 		})
 		this.panel.addEventListener('mousedown',checkPanel)
 
-		this.panel.addEventListener('mouseup',function(){
+		this.panel.addEventListener('mouseout',function(){
 			that.chartLine.canvas.style.willChange = 'auto';
 		})
 		this.panel.addEventListener('mouseup',checkPanel)
@@ -24,22 +24,27 @@ function drawChart(dataMas){
 
 		function checkAndDraw(){
 				
+				let panelWidth = that.panel.clientWidth;
+				let smallScreenWidth = that.smallScreen.clientWidth;
+
 				// differnt big screen and small screen
-				let sizeDif = that.getCoords(that.panel).width / that.getCoords(that.smallScreen).width;
+				let sizeDif = panelWidth / smallScreenWidth;
 
 				// changes width big screen
-				that.chartLine.canvas.width =  that.getCoords(that.panel).width * sizeDif; 
+				that.chartLine.canvas.width =  panelWidth * sizeDif; 
 
 				// move big screen
-				that.chartLine.canvas.style.transform = `translate3d(${ that.getCoords(that.rightControl).width * sizeDif}px,0,0)`
+				that.chartLine.canvas.style.transform = `translate3d(${ that.rightControl.clientWidth * sizeDif}px,0,0)`
 
 				// changes stepX for big screen
-				that.widthBigStep = that.smallChartWidth / (that.getCoords(that.smallScreen).width / that.widthSmallStep)
+				that.widthBigStep = that.smallChartWidth / (smallScreenWidth / that.widthSmallStep)
 
 				// clear big screen canvas
-				that.chartLine.ctx().clearRect(0,0, that.chartLine.width, that.chartLine.height)
+				// that.chartLine.ctx().clearRect(0,0, that.chartLine.width, that.chartLine.height)
 
-				that.activeChartLine()			
+				that.activeChartLine()	
+
+						
 			}
 
 

@@ -2,11 +2,11 @@ import ControlChart from '../control/controlPanel'
 
 function drawLine(){
 	ControlChart.prototype.drawLine = function(obj){
-		let mas = this.dataMas[0]['columns'][obj.n];
-		let color = this.dataMas[0]['colors'][mas[0]];
-		let masLength = mas.length;
+		let mas = this.dataMas[this.numChart]['columns'][obj.n];
+		let color = this.dataMas[this.numChart]['colors'][mas[0]];
 		
-
+		let line = this.lineY0;
+		let lineLength = line.length;
 
 		let chart = obj.canvas.canvas;
 		let ctx = obj.canvas.ctx();
@@ -22,11 +22,12 @@ function drawLine(){
 		ctx.lineCap = 'round';
 
 		
-
+	
 		if(stepX >= 0){
 
-			while(masLength -= 1){
-				ctx.lineTo(stepX -= obj.step, chart.height - mas[masLength] / obj.dif)
+			while(lineLength -= 1){
+
+				ctx.lineTo(stepX -= obj.step, chart.height - line[lineLength] / obj.dif)
 			}
 		}
 

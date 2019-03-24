@@ -21,11 +21,18 @@ getData('src/chart_data.json')
 		ControlChart.prototype.dataMas = jsonparse; 
 
 		let controls = {}; 
-		controls.chart = new ControlChart(document.getElementsByClassName('chart')[0])
+		controls.chart = new ControlChart(document.getElementsByClassName('chart')[0], 4)
+
+
 		console.log(controls)
-		drawBg(controls.chart.chartBg.canvas)
+		
+
+
 
 		// include modules
+		drawBg()
+		controls.chart.drawBg()
+
 		moveVisible()
 		controls.chart.moveVisible()
 
@@ -35,10 +42,6 @@ getData('src/chart_data.json')
 		drawLine()
 
 		buttonsControl(jsonparse)
-		controls.chart.buttonsControl()
-
-
+		controls.chart.buttonsControl()	
 
 	})
-
-
